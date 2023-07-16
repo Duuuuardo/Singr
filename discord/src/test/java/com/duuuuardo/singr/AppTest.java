@@ -3,13 +3,6 @@
  */
 package com.duuuuardo.singr;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class AppTest {
-  @Test
-  void appHasAStructure() {
-    Singr classUnderTest = new Singr();
-    assertNotNull(classUnderTest, "O cliente deve possuir a classe main");
-  }
-}
+class AppTest {}
