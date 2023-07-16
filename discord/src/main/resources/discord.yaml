@@ -1,0 +1,26 @@
+discordToken: "Bot token goes here"
+clientID: "Client user id goes here"
+clientSecret: "Client secret goes here"
+maxShards: 1
+status: "ONLINE"
+disallowBots: true
+
+intents: 
+  - "AUTO_MODERATION_CONFIGURATION"
+  - "AUTO_MODERATION_EXECUTION"
+  - "DIRECT_MESSAGE_REACTIONS"
+  - "DIRECT_MESSAGE_TYPING"
+  - "DIRECT_MESSAGES"
+  - "GUILD_BANS"
+  - "GUILD_EMOJIS_AND_STICKERS"
+  - "GUILD_INVITES"
+  - "GUILD_MEMBERS"
+  - "GUILD_MESSAGE_REACTIONS"
+  - "GUILD_MESSAGE_TYPING"
+  - "GUILD_MESSAGES"
+  - "GUILD_MODERATION"
+  - "GUILD_PRESENCES"
+  - "GUILD_VOICE_STATES"
+  - "GUILD_WEBHOOKS"
+  - "MESSAGE_CONTENT"
+  - "SCHEDULED_EVENTS"
