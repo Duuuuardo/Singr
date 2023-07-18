@@ -5,6 +5,15 @@ maxShards: 1
 status: "ONLINE"
 disallowBots: true
 
+activity: 
+  type: "PLAYING"
+  name: "Um simples bot de musica para discord!"
+
+discord:
+  cacheFlags: 
+    - "EMOJI"
+    - "MEMBER_OVERRIDES"
+  
 intents: 
   - "AUTO_MODERATION_CONFIGURATION"
   - "AUTO_MODERATION_EXECUTION"
