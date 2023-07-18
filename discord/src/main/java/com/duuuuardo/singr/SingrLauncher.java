@@ -1,16 +1,19 @@
 package com.duuuuardo.singr;
 
-import com.duuuuardo.singr.utils.ConfigUtils;
 import com.duuuuardo.singr.utils.config.DiscordConfig;
+import com.duuuuardo.singr.utils.config.ServerConfig;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class SingrLauncher {
+  public static Singr singr;
+
   public static void main(String[] args) {
     var configurationFile = new File("./discord.yaml");
+    var serverConfFile = new File("./server.yaml");
 
-    if (!configurationFile.exists()) {
+    if (!configurationFile.exists() || !serverConfFile.exists()) {
       System.out.println("Welcome to Singr Launcher!");
       System.out.println("");
       System.out.println("Some configuration files were created in the executable folder!");
@@ -19,13 +22,15 @@ public class SingrLauncher {
       System.out.println("After completing theese steps you can run the jar again!");
 
       copyFileFromJar("/discord.yaml", "./discord.yaml");
+      copyFileFromJar("/server.yaml", "./server.yaml");
+
       System.exit(1);
       return;
     }
 
-    DiscordConfig config = ConfigUtils.readConfigurationFromFile(configurationFile);
-
-    Singr singr = new Singr(config);
+    DiscordConfig config = DiscordConfig.read(configurationFile);
+    ServerConfig serverConfig = ServerConfig.read(serverConfFile);
+    Singr singr = new Singr(config, serverConfig);
     singr.start();
   }
 
