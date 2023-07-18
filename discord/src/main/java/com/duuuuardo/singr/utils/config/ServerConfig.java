@@ -1,16 +1,20 @@
-package com.duuuuardo.singr.utils;
+package com.duuuuardo.singr.utils.config;
 
-import com.duuuuardo.singr.utils.config.DiscordConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.File;
 
-public class ConfigUtils {
-  public static DiscordConfig readConfigurationFromFile(File file) {
+public class ServerConfig {
+  public Integer connectTimeout;
+  public Integer readTimeout;
+  public Integer writeTimeout;
+  public Integer maxRequestsPerHost;
+
+  public static ServerConfig read(File file) {
     try {
       ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
 
-      DiscordConfig config = objectMapper.readValue(file, DiscordConfig.class);
+      ServerConfig config = objectMapper.readValue(file, ServerConfig.class);
       return config;
     } catch (Exception e) {
       e.printStackTrace();
