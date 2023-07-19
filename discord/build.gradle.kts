@@ -1,12 +1,8 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
-val singrVersion by lazy { ext["singr-version"] as String }
-val jdaVersion by lazy { ext["jda-version"] as String }
-
 plugins {
   java
-  id("com.github.johnrengelman.shadow") version "8.1.1"
 }
+
+val mainClass = "com.duuuuardo.singr.SingrLauncher"
 
 repositories {
   gradlePluginPortal()
@@ -17,7 +13,10 @@ repositories {
   maven("https://m2.dv8tion.net/releases")
 }
 
-tasks.withType<Jar> { manifest { attributes["Main-Class"] = "com.duuuuardo.singr.SingrLauncher" } }
+tasks.withType<Jar> { 
+  manifest { attributes["Main-Class"] = mainClass } 
+  archiveBaseName = "${project.name}-runnable"
+}
 
 dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
@@ -30,16 +29,7 @@ dependencies {
   implementation("com.google.guava:guava:31.1-jre")
   implementation("org.slf4j:slf4j-api:2.0.7")
   implementation("org.slf4j:slf4j-simple:2.0.7")
-  implementation("net.dv8tion:JDA:${jdaVersion}")
+  implementation("net.dv8tion:JDA:${Versions.JDA}")
 }
-
-tasks {
-  named<ShadowJar>("shadowJar") {
-    archiveBaseName.set("discord-fat")
-    mergeServiceFiles()
-  }
-}
-
-tasks { build { dependsOn(shadowJar) } }
 
 tasks.named<Test>("test") { useJUnitPlatform() }
