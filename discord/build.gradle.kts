@@ -1,5 +1,8 @@
-plugins {
-  java
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+plugins { 
+  java 
+  id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 val mainClass = "com.duuuuardo.singr.SingrLauncher"
@@ -13,9 +16,9 @@ repositories {
   maven("https://m2.dv8tion.net/releases")
 }
 
-tasks.withType<Jar> { 
-  manifest { attributes["Main-Class"] = mainClass } 
-  archiveBaseName = "${project.name}-runnable"
+tasks.withType<Jar> {
+  manifest { attributes["Main-Class"] = mainClass }
+  archiveBaseName = "${project.name}-runnable" 
 }
 
 dependencies {
@@ -33,3 +36,15 @@ dependencies {
 }
 
 tasks.named<Test>("test") { useJUnitPlatform() }
+
+tasks {
+    named<ShadowJar>("shadowJar") {
+        mergeServiceFiles()
+    }
+}
+
+tasks {
+    build {
+        dependsOn(shadowJar)
+    }
+}
